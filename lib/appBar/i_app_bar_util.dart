@@ -99,7 +99,7 @@ class IAppBarUtil {
     bool hasBotLine = false,
     Color? botLineColor,
     bool titleInCenter = true,
-    Color backgroundColor = Colors.white,
+    Color? backgroundColor,
     Image? backgroundImage,
     VoidCallback? onTapBackBtn,
     List<IAction>? leftActions,
