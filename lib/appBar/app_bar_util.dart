@@ -6,13 +6,16 @@ class AppBarUtil {
   static config({
     TextStyle? textTitleStyle,
     TextStyle? textItemStyle,
+    Color? defBackgroundColor,
   }) {
     _textTitleStyle = textTitleStyle;
     _textItemStyle = textItemStyle;
+    _defBackgroundColor = defBackgroundColor;
   }
 
   static TextStyle? _textTitleStyle;
   static TextStyle? _textItemStyle;
+  static Color? _defBackgroundColor;
 
   static titleBar(
     BuildContext context, {
@@ -25,7 +28,7 @@ class AppBarUtil {
     bool hasBotLine = false,
     Color? botLineColor,
     bool titleInCenter = true,
-    Color backgroundColor = Colors.white,
+    Color? backgroundColor,
     Image? backgroundImage,
     VoidCallback? onTapBackBtn,
     List<Widget>? leftActions,
@@ -49,7 +52,7 @@ class AppBarUtil {
       hasBotLine: hasBotLine,
       botLineColor: botLineColor,
       titleInCenter: titleInCenter,
-      backgroundColor: backgroundColor,
+      backgroundColor: backgroundColor ?? _defBackgroundColor ?? Colors.white,
       backgroundImage: backgroundImage,
       onTapBackBtn: onTapBackBtn,
       leftActions: leftActions,
