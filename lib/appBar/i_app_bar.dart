@@ -20,8 +20,8 @@ class IAppBar extends StatefulWidget implements PreferredSizeWidget {
   final Image? backgroundImage;
   final GestureTapCallback? onTapBackBtn;
   final Widget? bottom;
-  final double barH;
   final double bottomH;
+  final double barH;
   final EdgeInsetsGeometry? padding;
   final BuildContext context;
   final SystemUiOverlayStyle? systemOverlayStyle;
