@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'i_app_bar.dart';
 
-class Action {
+class IAction {
   Widget? widget;
   Widget? icon;
   String? text;
@@ -12,18 +12,18 @@ class Action {
     if (widget != null) {
       return GestureDetector(onTap: onTap, child: widget);
     } else if (icon != null) {
-      return AppBarUtil.iconItem(icon: icon!, onTap: onTap);
+      return IAppBarUtil.iconItem(icon: icon!, onTap: onTap);
     } else if (text != null) {
-      return AppBarUtil.textItem(text: text!, onTap: onTap);
+      return IAppBarUtil.textItem(text: text!, onTap: onTap);
     } else {
       return const SizedBox();
     }
   }
 
-  Action({this.widget, this.icon, this.text, this.onTap});
+  IAction({this.widget, this.icon, this.text, this.onTap});
 }
 
-class AppBarUtil {
+class IAppBarUtil {
   static config({
     TextStyle? textTitleStyle,
     TextStyle? textItemStyle,
@@ -52,8 +52,8 @@ class AppBarUtil {
     Color? backgroundColor,
     Image? backgroundImage,
     VoidCallback? onTapBackBtn,
-    List<Action>? leftActions,
-    List<Action>? rightActions,
+    List<IAction>? leftActions,
+    List<IAction>? rightActions,
     Widget? bottom,
     double bottomH = 0,
     EdgeInsets padding = const EdgeInsets.only(left: 6, right: 6),
@@ -102,8 +102,8 @@ class AppBarUtil {
     Color backgroundColor = Colors.white,
     Image? backgroundImage,
     VoidCallback? onTapBackBtn,
-    List<Action>? leftActions,
-    List<Action>? rightActions,
+    List<IAction>? leftActions,
+    List<IAction>? rightActions,
     Widget? bottom,
     double bottomH = 0,
     EdgeInsets padding = const EdgeInsets.only(left: 6, right: 6),
