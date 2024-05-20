@@ -41,9 +41,9 @@ class ISize {
     _devicePixelRatio = window.devicePixelRatio;
     _textScaleFactor =
         WidgetsBinding.instance.platformDispatcher.textScaleFactor;
-    _screenW = window.physicalSize.width / devicePixelRatio;
-    _screenH = window.physicalSize.height / devicePixelRatio;
-    _statusBarH = window.padding.top / devicePixelRatio;
-    _safeBottomH = window.padding.bottom / devicePixelRatio;
+    _screenW = window.physicalSize.width / _devicePixelRatio;
+    _screenH = window.physicalSize.height / _devicePixelRatio;
+    _statusBarH = window.padding.top / _devicePixelRatio;
+    _safeBottomH = window.padding.bottom / _devicePixelRatio;
   }
 }
