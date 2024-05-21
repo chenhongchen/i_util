@@ -21,7 +21,7 @@ class IAction {
     }
   }
 
-  IAction({this.widget, this.icon, this.text, this.onTap});
+  IAction({this.widget, this.icon, this.text, this.style, this.onTap});
 }
 
 class IAppBarUtil {
