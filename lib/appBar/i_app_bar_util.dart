@@ -187,7 +187,7 @@ class IAppBarUtil {
           text,
           style: style ??
               _textItemStyle ??
-              const TextStyle(fontSize: 14, color: Colors.white),
+              const TextStyle(fontSize: 14, color: Colors.black),
         ),
       ),
     );
