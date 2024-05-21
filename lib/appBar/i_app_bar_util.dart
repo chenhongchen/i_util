@@ -6,6 +6,7 @@ class IAction {
   Widget? widget;
   Widget? icon;
   String? text;
+  TextStyle? style;
   VoidCallback? onTap;
 
   Widget get action {
@@ -14,7 +15,7 @@ class IAction {
     } else if (icon != null) {
       return IAppBarUtil.iconItem(icon: icon!, onTap: onTap);
     } else if (text != null) {
-      return IAppBarUtil.textItem(text: text!, onTap: onTap);
+      return IAppBarUtil.textItem(text: text!, style: style, onTap: onTap);
     } else {
       return const SizedBox();
     }
@@ -170,7 +171,11 @@ class IAppBarUtil {
     );
   }
 
-  static Widget textItem({required String text, VoidCallback? onTap}) {
+  static Widget textItem({
+    required String text,
+    TextStyle? style,
+    VoidCallback? onTap,
+  }) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -180,7 +185,8 @@ class IAppBarUtil {
         color: Colors.transparent,
         child: Text(
           text,
-          style: _textItemStyle ??
+          style: style ??
+              _textItemStyle ??
               const TextStyle(fontSize: 14, color: Colors.white),
         ),
       ),
