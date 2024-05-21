@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
+import 'package:i_util/i_extension.dart';
 import 'package:i_util/i_util.dart';
 
 void main() {
@@ -23,6 +24,10 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     initPlatformState();
+    final double amount = 1234567.00010;
+
+    print(amount.toMoney(decimalDigits: 5,trimTrailZero: true));
+    print(amount.toUSD);
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.

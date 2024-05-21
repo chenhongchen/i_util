@@ -13,6 +13,8 @@ dependencies:
   plugin_platform_interface: ^2.0.2
   connectivity_plus: any
   fluttertoast: any
+  crypto: any
+  intl: any
 
 dev_dependencies:
   flutter_test:
