@@ -180,3 +180,13 @@ extension IColorExt on Color {
     return byteData?.buffer.asUint8List();
   }
 }
+
+extension IObject on Object {
+  void get toPrint => dPrint(toString());
+}
+
+void Function(Object object) dPrint =
+    (!const bool.fromEnvironment('dart.vm.product') &&
+            !const bool.fromEnvironment('dart.vm.profile'))
+        ? print
+        : (Object object) {};
