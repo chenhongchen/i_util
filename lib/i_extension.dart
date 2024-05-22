@@ -182,10 +182,10 @@ extension IColorExt on Color {
 }
 
 extension IObject on Object {
-  void get toPrint => dPrint(toString());
+  void get toPrint => iPrint(toString());
 }
 
-void Function(Object object) dPrint =
+void Function(Object object) iPrint =
     (!const bool.fromEnvironment('dart.vm.product') &&
             !const bool.fromEnvironment('dart.vm.profile'))
         ? print
