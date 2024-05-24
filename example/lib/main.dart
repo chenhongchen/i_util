@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -25,7 +27,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     initPlatformState();
-    String longText = 'ABCDEF ' * 1000; // 生成一个非常长的字符串
+    String longText = '澳洲值得去旅游胜地推荐！' * 1000; // 生成一个非常长的字符串
     longText.toPrint(onlyDebug: false);
   }
 

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 
 class ILogger {
@@ -5,14 +7,14 @@ class ILogger {
   static const _split =
       '$_separator$_separator$_separator$_separator$_separator$_separator$_separator$_separator$_separator';
   static var _title = 'ILogger';
-  static int _limitLength = 1000;
+  static int _limitBytesLength = 1000;
   static String _startLine = '$_split$_title$_split';
   static String _endLine = '$_split$_separator$_separator$_separator$_split';
   static bool _format = false;
 
   static void init({String? title, int? limitLength, bool? format}) {
     _title = title ?? _title;
-    _limitLength = limitLength ?? _limitLength;
+    _limitBytesLength = limitLength ?? _limitBytesLength;
     _format = format ?? _format;
     _startLine = '$_split$_title$_split';
     var endLineStr = StringBuffer();
@@ -42,11 +44,7 @@ class ILogger {
       _print(_startLine);
       _logEmptyLine();
     }
-    if (msg.length < _limitLength) {
-      _print(msg);
-    } else {
-      segmentationLog(msg);
-    }
+    segmentationLog(msg);
     if (_format) {
       _logEmptyLine();
       _print(_endLine);
@@ -54,20 +52,34 @@ class ILogger {
   }
 
   static void segmentationLog(String msg) {
-    var outStr = StringBuffer();
-    for (var index = 0; index < msg.length; index++) {
-      outStr.write(msg[index]);
-      if (index % _limitLength == 0 && index != 0) {
-        _print(outStr);
-        outStr.clear();
-        var lastIndex = index + 1;
-        if (msg.length - lastIndex < _limitLength) {
-          var remainderStr = msg.substring(lastIndex, msg.length);
-          _print(remainderStr);
-          break;
-        }
-      }
+    List list = splitStringByByteSize(msg, _limitBytesLength);
+    for (String str in list) {
+      _print(str);
     }
+  }
+
+  /// 按限定的字节长度分割字符串
+  static List<String> splitStringByByteSize(String str, int size) {
+    List<int> encodedBytes = utf8.encode(str);
+    List<String> result = [];
+    int start = 0;
+
+    while (start < encodedBytes.length) {
+      int end = (start + size < encodedBytes.length)
+          ? start + size
+          : encodedBytes.length;
+
+      // 确保不在一个字符的中间进行分割
+      while (end < encodedBytes.length && (encodedBytes[end] & 0xC0) == 0x80) {
+        end--;
+      }
+
+      List<int> byteSegment = encodedBytes.sublist(start, end);
+      result.add(utf8.decode(byteSegment));
+      start = end;
+    }
+
+    return result;
   }
 
   static void _logEmptyLine() {
