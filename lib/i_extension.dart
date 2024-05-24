@@ -3,6 +3,7 @@ import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui';
 import 'package:crypto/crypto.dart';
+import 'package:i_util/i_logger.dart';
 import "package:intl/intl.dart";
 import '/value_util.dart';
 
@@ -182,11 +183,11 @@ extension IColorExt on Color {
 }
 
 extension IObject on Object {
-  void get toPrint => iPrint(toString());
+  void toPrint({bool onlyDebug = true}) {
+    if (onlyDebug) {
+      ILogger.d(toString());
+    } else {
+      ILogger.v(toString());
+    }
+  }
 }
-
-void Function(Object object) iPrint =
-    (!const bool.fromEnvironment('dart.vm.product') &&
-            !const bool.fromEnvironment('dart.vm.profile'))
-        ? print
-        : (Object object) {};
