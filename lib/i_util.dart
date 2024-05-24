@@ -5,6 +5,7 @@ export 'router/net_status_manager.dart';
 export 'i_size.dart';
 export 'i_alert.dart';
 export 'i_extension.dart';
+export 'i_logger.dart';
 import 'i_util_platform_interface.dart';
 
 class IUtil {
