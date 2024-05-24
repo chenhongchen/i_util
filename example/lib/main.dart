@@ -25,8 +25,8 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     initPlatformState();
-    'only debug 打印：点击放大健康东街肯定是理发'.toPrint();
-    '所有环境 打印：点击放大健康东街肯定是理发'.toPrint(onlyDebug: false);
+    String longText = 'ABCDEF ' * 1000; // 生成一个非常长的字符串
+    longText.toPrint(onlyDebug: false);
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.

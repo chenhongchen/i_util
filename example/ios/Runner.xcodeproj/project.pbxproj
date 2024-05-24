@@ -172,7 +172,6 @@
 				15FF1A062D7F9C5EDDEC8A17 /* Pods-RunnerTests.release.xcconfig */,
 				31534B34771BAD15413D3984 /* Pods-RunnerTests.profile.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -485,6 +484,8 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+					/usr/bin/swift,
+					/usr/lib/swift,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.iUtilExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -651,6 +652,8 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+					/usr/bin/swift,
+					/usr/lib/swift,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.iUtilExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -670,6 +673,8 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+					/usr/bin/swift,
+					/usr/lib/swift,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.iUtilExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
