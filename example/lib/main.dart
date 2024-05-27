@@ -1,11 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'dart:async';
-
 import 'package:flutter/services.dart';
-import 'package:i_util/i_extension.dart';
-import 'package:i_util/i_logger.dart';
 import 'package:i_util/i_util.dart';
 
 void main() {
@@ -20,49 +14,62 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
-  final _iUtilPlugin = IUtil();
-
   @override
   void initState() {
     super.initState();
-    initPlatformState();
     String longText = '澳洲值得去旅游胜地推荐！' * 1000; // 生成一个非常长的字符串
     longText.toPrint(onlyDebug: false);
-  }
-
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    // We also handle the message potentially returning null.
-    try {
-      platformVersion =
-          await _iUtilPlugin.getPlatformVersion() ?? 'Unknown platform version';
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-
-    setState(() {
-      _platformVersion = platformVersion;
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
+        appBar: const IAppBar(
+          hasBackBtn: false,
+          backgroundColor: Colors.blue,
+          title: Text('Plugin example app'),
         ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
-        ),
+        body: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+          return Center(
+            child: GestureDetector(
+              onTap: () {
+                showIBottomSheetView(
+                  context: context,
+                  sheetItems: [
+                    IBottomSheetItem(text: '是'),
+                    IBottomSheetItem(text: '否'),
+                    IBottomSheetItem(
+                        text: '',
+                        height: MediaQuery.of(context).padding.bottom),
+                  ],
+                );
+              },
+              child: BorderContainer(
+                width: 80,
+                height: 80,
+                borderRadius: 40,
+                borderWidth: 2,
+                borderColor: Colors.brown,
+                child: FutureBuilder(
+                    future: Colors.red.toImage(width: 130, height: 130),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<Uint8List?> snapshot) {
+                      if (snapshot.data == null) {
+                        return Container(color: Colors.blue);
+                      }
+                      return Image.memory(
+                        snapshot.data!,
+                        width: 100,
+                        height: 100,
+                        // fit: BoxFit.cover,
+                      );
+                    }),
+              ),
+            ),
+          );
+        }),
       ),
     );
   }

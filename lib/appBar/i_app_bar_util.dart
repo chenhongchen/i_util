@@ -39,8 +39,7 @@ class IAppBarUtil {
   static TextStyle? _textItemStyle;
   static Color? _defBackgroundColor;
 
-  static titleBar(
-    BuildContext context, {
+  static titleBar({
     Key? key,
     String text = '',
     Widget? widget,
@@ -67,7 +66,6 @@ class IAppBarUtil {
     ShapeBorder? shape,
   }) {
     return IAppBar(
-      context,
       key: key,
       title: widget ?? textTitle(text),
       hasBackBtn: hasBackBtn,
@@ -94,8 +92,7 @@ class IAppBarUtil {
     );
   }
 
-  static textTitleBar(
-    BuildContext context, {
+  static textTitleBar({
     Key? key,
     String text = '',
     bool hasBackBtn = true,
@@ -121,7 +118,6 @@ class IAppBarUtil {
     ShapeBorder? shape,
   }) {
     return titleBar(
-      context,
       key: key,
       text: text,
       hasBackBtn: hasBackBtn,

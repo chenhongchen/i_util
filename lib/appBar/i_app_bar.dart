@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../i_size.dart';
 
 const iAppBarIconDefWidth = 44.0;
 const iAppBarDefHeight = kToolbarHeight;
@@ -23,7 +24,6 @@ class IAppBar extends StatefulWidget implements PreferredSizeWidget {
   final double bottomH;
   final double barH;
   final EdgeInsetsGeometry? padding;
-  final BuildContext context;
   final SystemUiOverlayStyle? systemOverlayStyle;
   final bool forceMaterialTransparency;
   final Color? shadowColor;
@@ -31,11 +31,10 @@ class IAppBar extends StatefulWidget implements PreferredSizeWidget {
   final ShapeBorder? shape;
 
   @override
-  Size get preferredSize => Size(MediaQuery.of(context).size.width,
-      MediaQuery.of(context).padding.top + barH + bottomH);
+  Size get preferredSize =>
+      Size(ISize.screenW, ISize.statusBarH + barH + bottomH);
 
-  const IAppBar(
-    this.context, {
+  const IAppBar({
     Key? key,
     this.hasBackBtn = true,
     this.backBtnColor,
