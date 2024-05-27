@@ -3,7 +3,7 @@ import 'i_bottom_sheet.dart';
 
 typedef TapBottomSheetItemCallback = void Function(IBottomSheetItem sheetItem);
 
-Future<T?> showIBottomSheetView<T>({
+Future<T?> showIBottomSheet<T>({
   Key? key,
   required BuildContext context,
   required List<IBottomSheetItem> sheetItems,

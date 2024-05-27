@@ -35,7 +35,7 @@ class _MyAppState extends State<MyApp> {
           return Center(
             child: GestureDetector(
               onTap: () {
-                showIBottomSheetView(
+                showIBottomSheet(
                   context: context,
                   sheetItems: [
                     IBottomSheetItem(text: '是'),
