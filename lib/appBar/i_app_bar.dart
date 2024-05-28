@@ -1,7 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../i_size.dart';
 
 const iAppBarIconDefWidth = 44.0;
 const iAppBarDefHeight = kToolbarHeight;
@@ -31,8 +30,7 @@ class IAppBar extends StatefulWidget implements PreferredSizeWidget {
   final ShapeBorder? shape;
 
   @override
-  Size get preferredSize =>
-      Size(ISize.screenW, ISize.statusBarH + barH + bottomH);
+  Size get preferredSize => Size(double.infinity, barH + bottomH);
 
   const IAppBar({
     Key? key,
@@ -133,24 +131,23 @@ class _IAppBar extends State<IAppBar> {
       backgroundColor = null;
     }
 
+    double statusBarH = MediaQuery.of(context).padding.top;
+    double screenW = MediaQuery.of(context).size.width;
+    double totalAppBarH = widget.preferredSize.height + statusBarH;
     return Container(
-      height: widget.preferredSize.height,
-      width: MediaQuery.of(context).size.width,
+      height: totalAppBarH,
+      width: screenW,
       color: backgroundColor,
       decoration: widget.backgroundDecoration,
       child: Stack(
         children: [
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: widget.preferredSize.height,
-            child: widget.backgroundImage,
-          ),
+          Positioned.fill(child: SizedBox(child: widget.backgroundImage)),
           Positioned.fill(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 SizedBox(
-                  height: MediaQuery.of(context).padding.top,
+                  height: statusBarH,
                 ),
                 widget.autoFitForegroundColor
                     ? ColorFiltered(
@@ -158,11 +155,11 @@ class _IAppBar extends State<IAppBar> {
                           fitColor,
                           BlendMode.srcIn,
                         ),
-                        child: _buildContent(fitColor),
+                        child: _buildContent(fitColor, screenW),
                       )
-                    : _buildContent(fitColor),
+                    : _buildContent(fitColor, screenW),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width,
+                  width: screenW,
                   height: widget.bottomH,
                   child: widget.bottom,
                 ),
@@ -174,7 +171,7 @@ class _IAppBar extends State<IAppBar> {
     );
   }
 
-  Widget _buildContent(Color fitColor) {
+  Widget _buildContent(Color fitColor, double screenW) {
     Widget backBtn = widget.hasBackBtn
         ? GestureDetector(
             onTap: () {
@@ -198,7 +195,7 @@ class _IAppBar extends State<IAppBar> {
           )
         : Container();
     return Container(
-      width: MediaQuery.of(context).size.width,
+      width: screenW,
       height: widget.barH,
       padding: widget.padding,
       child: Stack(
@@ -224,8 +221,7 @@ class _IAppBar extends State<IAppBar> {
                           final RenderBox? rightRB = _rightKey.currentContext
                               ?.findRenderObject() as RenderBox?;
                           final rightW = rightRB?.size.width ?? 0;
-                          double width = MediaQuery.of(context).size.width -
-                              max(leftW, rightW) * 2;
+                          double width = screenW - max(leftW, rightW) * 2;
                           if (width > 0) _titleWidth.value = width;
                         });
                         return const SizedBox();
