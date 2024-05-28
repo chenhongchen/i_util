@@ -17,12 +17,14 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    String longText = '澳洲值得去旅游胜地推荐！' * 1000; // 生成一个非常长的字符串
+    String longText = '澳洲值得去旅游胜地推荐！' * 100; // 生成一个非常长的字符串
     longText.toPrint(onlyDebug: false);
   }
 
   @override
   Widget build(BuildContext context) {
+    ISize.init(context);
+    ISize.string.toPrint(onlyDebug: false);
     return MaterialApp(
       home: Scaffold(
         appBar: const IAppBar(
