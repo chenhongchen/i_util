@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'dart:developer' as developer;
 import 'package:flutter/foundation.dart';
 
 class ILogger {
@@ -29,8 +29,12 @@ class ILogger {
   }
 
   /// 仅仅debug环境打印
-  static void d(dynamic obj) {
-    _log(obj.toString(), true);
+  static void d(dynamic obj, {bool dartPrint = true}) {
+    if (dartPrint) {
+      developer.log(obj.toString());
+    } else {
+      _log(obj.toString(), true);
+    }
   }
 
   /// 所有环境打印
