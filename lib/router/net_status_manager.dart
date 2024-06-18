@@ -13,12 +13,13 @@ class NetStatusNotifier extends ChangeNotifier {
   NetStatusNotifier._internal() {
     subscription = Connectivity()
         .onConnectivityChanged
-        .listen((ConnectivityResult result) {
-      if (status != result) {
-        if (status != null && result == ConnectivityResult.none) {
+        .listen((List<ConnectivityResult> result) {
+      final ConnectivityResult connectivityResult = result.first;
+      if (status != connectivityResult) {
+        if (status != null && connectivityResult == ConnectivityResult.none) {
           showNetExceptionToast();
         }
-        status = result;
+        status = connectivityResult;
         if (!_disposed) {
           notifyListeners();
         }

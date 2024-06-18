@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   plugin_platform_interface: ^2.0.2
-  connectivity_plus: any
+  connectivity_plus: '>=6.0.0'
   fluttertoast: any
   crypto: any
   intl: any

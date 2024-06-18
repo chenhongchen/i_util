@@ -5,12 +5,11 @@
 import 'dart:ui' show lerpDouble;
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 
 const Duration _bottomSheetEnterDuration = Duration(milliseconds: 250);
 const Duration _bottomSheetExitDuration = Duration(milliseconds: 200);
-const Curve _modalBottomSheetCurve = decelerateEasing;
+const Curve _modalBottomSheetCurve = Easing.legacyDecelerate;
 const double _minFlingVelocity = 700.0;
 const double _closeProgressThreshold = 0.5;
 
@@ -72,10 +71,7 @@ class BottomSheet extends StatefulWidget {
     this.clipBehavior,
     required this.onClosing,
     required this.builder,
-  })  : assert(enableDrag != null),
-        assert(onClosing != null),
-        assert(builder != null),
-        assert(elevation == null || elevation >= 0.0),
+  })  : assert(elevation == null || elevation >= 0.0),
         super(key: key);
 
   /// The animation controller that controls the bottom sheet's entrance and
@@ -209,8 +205,9 @@ class _BottomSheetState extends State<BottomSheet> {
         isClosing = true;
       }
     } else if (widget.animationController!.value < _closeProgressThreshold) {
-      if (widget.animationController!.value > 0.0)
+      if (widget.animationController!.value > 0.0) {
         widget.animationController!.fling(velocity: -1.0);
+      }
       isClosing = true;
     } else {
       widget.animationController!.forward();
@@ -262,8 +259,8 @@ class _BottomSheetState extends State<BottomSheet> {
             onVerticalDragStart: _handleDragStart,
             onVerticalDragUpdate: _handleDragUpdate,
             onVerticalDragEnd: _handleDragEnd,
-            child: bottomSheet,
             excludeFromSemantics: true,
+            child: bottomSheet,
           );
   }
 }
@@ -317,9 +314,7 @@ class _ModalBottomSheet<T> extends StatefulWidget {
     this.isScrollControlled = false,
     this.enableDrag = true,
     this.maxHeight,
-  })  : assert(isScrollControlled != null),
-        assert(enableDrag != null),
-        super(key: key);
+  }) : super(key: key);
 
   final _ModalBottomSheetRoute<T>? route;
   final bool isScrollControlled;
@@ -433,10 +428,7 @@ class _ModalBottomSheetRoute<T> extends PopupRoute<T> {
     RouteSettings? settings,
     this.transitionAnimationController,
     this.maxHeight,
-  })  : assert(isScrollControlled != null),
-        assert(isDismissible != null),
-        assert(enableDrag != null),
-        super(settings: settings);
+  }) : super(settings: settings);
 
   final WidgetBuilder? builder;
   final CapturedThemes capturedThemes;
@@ -531,8 +523,7 @@ class _BottomSheetSuspendedCurve extends ParametricCurve<double> {
   const _BottomSheetSuspendedCurve(
     this.startingPoint, {
     this.curve = Curves.easeOutCubic,
-  })  : assert(startingPoint != null),
-        assert(curve != null);
+  });
 
   /// The progress value at which [curve] should begin.
   ///
@@ -679,12 +670,6 @@ Future<T?> showIModalBottomSheet<T>({
   AnimationController? transitionAnimationController,
   double? maxHeight,
 }) {
-  assert(context != null);
-  assert(builder != null);
-  assert(isScrollControlled != null);
-  assert(useRootNavigator != null);
-  assert(isDismissible != null);
-  assert(enableDrag != null);
   assert(debugCheckHasMediaQuery(context));
   assert(debugCheckHasMaterialLocalizations(context));
 
@@ -747,7 +732,7 @@ Future<T?> showIModalBottomSheet<T>({
 ///    sheet.
 ///  * [Scaffold.of], for information about how to obtain the [BuildContext].
 ///  * <https://material.io/design/components/sheets-bottom.html#standard-bottom-sheet>
-PersistentBottomSheetController<T> showBottomSheet<T>({
+PersistentBottomSheetController showBottomSheet({
   required BuildContext context,
   required WidgetBuilder builder,
   Color? backgroundColor,
@@ -756,11 +741,9 @@ PersistentBottomSheetController<T> showBottomSheet<T>({
   Clip? clipBehavior,
   AnimationController? transitionAnimationController,
 }) {
-  assert(context != null);
-  assert(builder != null);
   assert(debugCheckHasScaffold(context));
 
-  return Scaffold.of(context).showBottomSheet<T>(
+  return Scaffold.of(context).showBottomSheet(
     builder,
     backgroundColor: backgroundColor,
     elevation: elevation,
