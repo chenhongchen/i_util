@@ -15,6 +15,8 @@ dependencies:
   fluttertoast: any
   crypto: any
   intl: any
+  encrypt: any
+  pointycastle: any
 
 dev_dependencies:
   flutter_test:
