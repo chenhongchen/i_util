@@ -37,16 +37,21 @@ class _MyAppState extends State<MyApp> {
           return Center(
             child: GestureDetector(
               onTap: () {
-                showIBottomSheet(
-                  context: context,
-                  sheetItems: [
-                    IBottomSheetItem(text: '是'),
-                    IBottomSheetItem(text: '否'),
-                    IBottomSheetItem(
-                        text: '',
-                        height: MediaQuery.of(context).padding.bottom),
-                  ],
-                );
+                IAlert.text(context,
+                    content: 'hahah',
+                    showLeft: false,
+                    rightAutoPop: false,
+                    onTapRight: () {});
+                // showIBottomSheet(
+                //   context: context,
+                //   sheetItems: [
+                //     IBottomSheetItem(text: '是'),
+                //     IBottomSheetItem(text: '否'),
+                //     IBottomSheetItem(
+                //         text: '',
+                //         height: MediaQuery.of(context).padding.bottom),
+                //   ],
+                // );
               },
               child: BorderContainer(
                 width: 80,

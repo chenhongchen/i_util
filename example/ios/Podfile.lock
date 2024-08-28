@@ -1,7 +1,7 @@
 PODS:
   - connectivity_plus (0.0.1):
     - Flutter
-    - ReachabilitySwift
+    - FlutterMacOS
   - Flutter (1.0.0)
   - fluttertoast (0.0.2):
     - Flutter
@@ -10,11 +10,10 @@ PODS:
     - Flutter
   - integration_test (0.0.1):
     - Flutter
-  - ReachabilitySwift (5.2.2)
   - Toast (4.1.1)
 
 DEPENDENCIES:
-  - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
+  - connectivity_plus (from `.symlinks/plugins/connectivity_plus/darwin`)
   - Flutter (from `Flutter`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - i_util (from `.symlinks/plugins/i_util/ios`)
@@ -22,12 +21,11 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - ReachabilitySwift
     - Toast
 
 EXTERNAL SOURCES:
   connectivity_plus:
-    :path: ".symlinks/plugins/connectivity_plus/ios"
+    :path: ".symlinks/plugins/connectivity_plus/darwin"
   Flutter:
     :path: Flutter
   fluttertoast:
@@ -38,12 +36,11 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/integration_test/ios"
 
 SPEC CHECKSUMS:
-  connectivity_plus: bf0076dd84a130856aa636df1c71ccaff908fa1d
-  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  fluttertoast: 9f2f8e81bb5ce18facb9748d7855bf5a756fe3db
+  connectivity_plus: ddd7f30999e1faaef5967c23d5b6d503d10434db
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  fluttertoast: e9a18c7be5413da53898f660530c56f35edfba9c
   i_util: 28fcd47597adb32841fb31cfd7eb7c5f11d5fa33
-  integration_test: 13825b8a9334a850581300559b8839134b124670
-  ReachabilitySwift: 2128f3a8c9107e1ad33574c6e58e8285d460b149
+  integration_test: ce0a3ffa1de96d1a89ca0ac26fca7ea18a749ef4
   Toast: 1f5ea13423a1e6674c4abdac5be53587ae481c4e
 
 PODFILE CHECKSUM: beab77b38961de946f08660e554f80ac174dc842
