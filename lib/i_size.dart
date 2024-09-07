@@ -15,6 +15,8 @@ class ISize {
 
   static double get textScaleFactor => ISize()._textScaleFactor;
 
+  static double get onePix => ISize()._onePix;
+
   static void init(BuildContext context) {
     if (_instance == null || _instance!._isEmpty) {
       ISize(context: context);
@@ -49,6 +51,7 @@ class ISize {
   late final double _safeBottomH;
   late final double _devicePixelRatio;
   late final double _textScaleFactor;
+  late final double _onePix;
 
   void _init({BuildContext? context}) {
     if (context != null) {
@@ -58,6 +61,7 @@ class ISize {
       _screenH = MediaQuery.of(context).size.height;
       _statusBarH = MediaQuery.of(context).padding.top;
       _safeBottomH = MediaQuery.of(context).padding.bottom;
+      _onePix = 1 / ((_devicePixelRatio <= 0) ? 1 : _devicePixelRatio);
       return;
     }
     var window = WidgetsBinding.instance.platformDispatcher.views.first;
@@ -68,6 +72,7 @@ class ISize {
     _screenH = window.physicalSize.height / _devicePixelRatio;
     _statusBarH = window.padding.top / _devicePixelRatio;
     _safeBottomH = window.padding.bottom / _devicePixelRatio;
+    _onePix = 1 / ((_devicePixelRatio <= 0) ? 1 : _devicePixelRatio);
   }
 
   @override
