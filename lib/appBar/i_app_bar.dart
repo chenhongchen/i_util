@@ -106,6 +106,7 @@ class _IAppBar extends State<IAppBar> {
         value: overlayStyle,
         child: Material(
           elevation: 0,
+          color: Colors.transparent,
           type: widget.forceMaterialTransparency
               ? MaterialType.transparency
               : MaterialType.canvas,
