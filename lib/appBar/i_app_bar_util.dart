@@ -28,15 +28,18 @@ class IAppBarUtil {
   static config({
     TextStyle? textTitleStyle,
     TextStyle? textItemStyle,
+    Color? defBackBtnColor,
     Color? defBackgroundColor,
   }) {
     _textTitleStyle = textTitleStyle;
     _textItemStyle = textItemStyle;
+    _defBackBtnColor = defBackBtnColor;
     _defBackgroundColor = defBackgroundColor;
   }
 
   static TextStyle? _textTitleStyle;
   static TextStyle? _textItemStyle;
+  static Color? _defBackBtnColor;
   static Color? _defBackgroundColor;
 
   static titleBar({
@@ -69,7 +72,7 @@ class IAppBarUtil {
       key: key,
       title: widget ?? textTitle(text),
       hasBackBtn: hasBackBtn,
-      backBtnColor: backBtnColor,
+      backBtnColor: backBtnColor ?? _defBackBtnColor,
       autoFitForegroundColor: autoFitForegroundColor,
       hasBotLine: hasBotLine,
       botLineColor: botLineColor,
