@@ -47,7 +47,7 @@ class IRouter {
             fullscreenDialog: fullscreenDialog,
             opaque: opaque,
             barrierColor: barrierColor,
-            settings: RouteSettings(name: _routeUrl(widget)),
+            settings: RouteSettings(name: _routeUrl(widget.runtimeType)),
             builder: (BuildContext context) {
               return _buildChild(widget);
             }))
@@ -73,7 +73,7 @@ class IRouter {
     Future<T?> result = Navigator.of(context, rootNavigator: true)
         .push<T>(ReplacementRoute(
             exitAnimation: exitAnimation,
-            settings: RouteSettings(name: _routeUrl(widget)),
+            settings: RouteSettings(name: _routeUrl(widget.runtimeType)),
             builder: (BuildContext context) {
               return _buildChild(widget);
             }))
@@ -101,7 +101,7 @@ class IRouter {
         .pushReplacement<T, T0>(ReplacementRoute(
             exitAnimation: exitAnimation,
             fullscreenDialog: fullscreenDialog,
-            settings: RouteSettings(name: _routeUrl(widget)),
+            settings: RouteSettings(name: _routeUrl(widget.runtimeType)),
             builder: (BuildContext context) {
               return _buildChild(widget);
             }))
