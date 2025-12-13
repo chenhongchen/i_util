@@ -36,6 +36,7 @@ class IRouter {
     bool? opaque,
     Color? barrierColor,
     bool needNetConnected = false,
+    Widget Function(Widget child)? wrapperBuilder,
   }) {
     if (needNetConnected && NetStatusNotifier().isConnected == false) {
       NetStatusNotifier().showNetExceptionToast();
@@ -49,7 +50,7 @@ class IRouter {
             barrierColor: barrierColor,
             settings: RouteSettings(name: _routeUrl(widget.runtimeType)),
             builder: (BuildContext context) {
-              return _buildChild(widget);
+              return _buildChild(widget, wrapperBuilder: wrapperBuilder);
             }))
         .then((value) {
       _didPop?.call();
@@ -64,6 +65,7 @@ class IRouter {
     required Widget widget,
     ExitAnimation exitAnimation = ExitAnimation.normal,
     bool needNetConnected = false,
+    Widget Function(Widget child)? wrapperBuilder,
   }) {
     if (needNetConnected && NetStatusNotifier().isConnected == false) {
       NetStatusNotifier().showNetExceptionToast();
@@ -75,7 +77,7 @@ class IRouter {
             exitAnimation: exitAnimation,
             settings: RouteSettings(name: _routeUrl(widget.runtimeType)),
             builder: (BuildContext context) {
-              return _buildChild(widget);
+              return _buildChild(widget, wrapperBuilder: wrapperBuilder);
             }))
         .then((value) {
       _didPop?.call();
@@ -91,6 +93,7 @@ class IRouter {
     ExitAnimation exitAnimation = ExitAnimation.normal,
     bool fullscreenDialog = false,
     bool needNetConnected = false,
+    Widget Function(Widget child)? wrapperBuilder,
   }) {
     if (needNetConnected && NetStatusNotifier().isConnected == false) {
       NetStatusNotifier().showNetExceptionToast();
@@ -103,7 +106,7 @@ class IRouter {
             fullscreenDialog: fullscreenDialog,
             settings: RouteSettings(name: _routeUrl(widget.runtimeType)),
             builder: (BuildContext context) {
-              return _buildChild(widget);
+              return _buildChild(widget, wrapperBuilder: wrapperBuilder);
             }))
         .then((value) {
       _didPop?.call();
@@ -180,11 +183,13 @@ class IRouter {
     return '${_routePrefix}_$className';
   }
 
-  static Widget _buildChild(Widget child) {
-    if (_wrapperBuilder == null) {
+  static Widget _buildChild(Widget child,
+      {Widget Function(Widget child)? wrapperBuilder}) {
+    final wb = (wrapperBuilder ?? _wrapperBuilder);
+    if (wb == null) {
       return child;
     } else {
-      return _wrapperBuilder!.call(child);
+      return wb.call(child);
     }
   }
 }
