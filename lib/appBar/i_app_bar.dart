@@ -5,6 +5,14 @@ import 'package:flutter/services.dart';
 const iAppBarIconDefWidth = 44.0;
 const iAppBarDefHeight = kToolbarHeight;
 
+Widget Function(Color? backBtnColor, Color fitColor) buildDefBackBtn =
+    (Color? backBtnColor, Color fitColor) {
+  return Icon(
+    Icons.arrow_back_ios_new,
+    color: backBtnColor ?? fitColor,
+  );
+};
+
 class IAppBar extends StatefulWidget implements PreferredSizeWidget {
   final bool autoFitForegroundColor;
   final bool hasBackBtn;
@@ -188,10 +196,7 @@ class _IAppBar extends State<IAppBar> {
               width: iAppBarIconDefWidth,
               height: widget.barH,
               color: Colors.transparent,
-              child: Icon(
-                Icons.arrow_back_ios_new,
-                color: widget.backBtnColor ?? fitColor,
-              ),
+              child: buildDefBackBtn.call(widget.backBtnColor, fitColor),
             ),
           )
         : Container();
