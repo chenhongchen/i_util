@@ -101,7 +101,7 @@ class _IAppBar extends State<IAppBar> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final AppBarTheme appBarTheme = AppBarTheme.of(context);
+    final AppBarThemeData appBarTheme = AppBarTheme.of(context);
     final SystemUiOverlayStyle overlayStyle = widget.systemOverlayStyle ??
         appBarTheme.systemOverlayStyle ??
         _systemOverlayStyleForBrightness(
